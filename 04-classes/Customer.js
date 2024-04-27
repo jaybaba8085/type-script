@@ -1,26 +1,54 @@
 var Customer = /** @class */ (function () {
     function Customer(theFirst, theLast, age, gender) {
-        this.firstName = theFirst;
-        this.lastName = theLast;
+        this._firstName = theFirst;
+        this._lastName = theLast;
         this._age = age;
         this._gender = gender;
     }
     //Normal Getter and Setter Method
     Customer.prototype.getFirstName = function () {
-        return this.firstName;
+        return this._firstName;
     };
     Customer.prototype.setFirstName = function (theFirstName) {
-        this.firstName = theFirstName;
+        this._firstName = theFirstName;
     };
     Customer.prototype.getLastName = function () {
-        return this.lastName;
+        return this._lastName;
     };
     Customer.prototype.setLastName = function (theLastName) {
-        this.lastName = theLastName;
+        this._lastName = theLastName;
     };
-    Object.defineProperty(Customer.prototype, "age", {
+    Customer.prototype.showFullName = function () {
+        return "".concat(this.getFirstName(), " ").concat(this.getLastName());
+    };
+    Object.defineProperty(Customer.prototype, "firstName", {
         //Other Ways To Implement Getter And Setter in Type Script
         //This Set Accessor Does Not Required to have Any Return Type
+        get: function () {
+            return this._firstName;
+        },
+        set: function (value) {
+            if (value.length < 2) {
+                throw new Error("Invalid First Name");
+            }
+            else {
+                this._firstName = value;
+            }
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Customer.prototype, "lastName", {
+        get: function () {
+            return this._lastName;
+        },
+        set: function (value) {
+            this._lastName = value;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Customer.prototype, "age", {
         get: function () {
             return this._age;
         },
@@ -53,17 +81,12 @@ var Customer = /** @class */ (function () {
     return Customer;
 }());
 var myCustomer = new Customer("Jay", "Patel", 23, "Male");
-// Direct Changeing the Name
-// myCustomer.firstName = "J";
-// myCustomer.lastName = "P";
-// Without Getter and setter 
+// With Accessors Getter and setter 
 console.log(myCustomer.firstName);
 console.log(myCustomer.lastName);
-myCustomer.setFirstName("Sam");
-myCustomer.setLastName("will");
-// With Getter and Setter
-console.log(myCustomer.getFirstName());
-console.log(myCustomer.getLastName());
-//Wuth The Help of Accessors
 console.log(myCustomer.age);
 console.log(myCustomer.gender);
+// With Mormal  Getter and Setter
+console.log(myCustomer.getFirstName());
+console.log(myCustomer.getLastName());
+console.log(myCustomer.showFullName());
