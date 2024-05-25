@@ -11,7 +11,7 @@ export class Shape {
     } 
     public set x(v : number) {
         this._x = v;
-    }
+    } 
     
     public get y() : number {
         return this._y;
