@@ -1,0 +1,1 @@
+# All classess that implements the interface must implement all methods inside the interface.
